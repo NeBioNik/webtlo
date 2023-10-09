@@ -189,7 +189,8 @@ function cfg_checkbox($cfg): Closure
 <body>
     <div id="menutabs" class="menu">
         <ul class="menu">
-            <li class="menu"><a href="#main" class="menu">Главная</a></li>
+            <li class="menu"><a href="#summary" class="menu">Сводка</a></li>
+            <li class="menu"><a href="#main" class="menu">Раздачи</a></li>
             <li class="menu"><a href="#settings" class="menu">Настройки</a></li>
             <li class="menu"><a href="#reports" class="menu">Отчёты</a></li>
             <li class="menu"><a href="#statistics" class="menu">Статистика</a></li>
@@ -200,6 +201,38 @@ function cfg_checkbox($cfg): Closure
             <p id="new_version_description"><?= "v$webtlo->version" ?></p>
         </div>
         <div id="content">
+            <div id="summary" class="content">
+                <div class="toolbar-buttons">
+                    <button type="button" id="get_statistics" title="Получить статистику по хранимым подразделам">
+                        Отобразить статистику
+                    </button>
+                </div>
+                <div id="data_summary">
+                    <table id="table_summary">
+                        <thead class="ui-widget-header">
+                        <tr>
+                            <th colspan="2">Подраздел</th>
+                            <th colspan="10">Количество и вес раздач</th>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th width="40%">Название</th>
+                            <th colspan="2">сc == 0</th>
+                            <th colspan="2">0.0 < cc <=0.5</th>
+                            <th colspan="2">0.5 < сc <=1.0</th>
+                            <th colspan="2">1.0 < сc <=1.5</th>
+                            <th colspan="2">Всего в подразделе</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="12">&mdash;</td>
+                        </tr>
+                        </tbody>
+                        <tfoot class="ui-widget-header"></tfoot>
+                    </table>
+                </div>
+            </div>
             <div id="main" class="content">
                 <select id="main-subsections">
                     <optgroup>

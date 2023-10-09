@@ -92,55 +92,55 @@ foreach ($forumReports->forums as $forum_id) {
     if ($user->userId === $forum->author_id && $forum->author_post_id && !empty($forumReport['header'])) {
         Log::append(sprintf('Отправка шапки, ид темы %d, ид сообщения %d', $topicId, $forum->author_post_id));
         // отправка сообщения с шапкой
-        $reports->send_message(
-            'editpost',
-            $forumReport['header'],
-            $topicId,
-            $forum->author_post_id,
-            '[Список] ' . $forum->name
-        );
+        // $reports->send_message(
+        //     'editpost',
+        //     $forumReport['header'],
+        //     $topicId,
+        //     $forum->author_post_id,
+        //     '[Список] ' . $forum->name
+        // );
         usleep(500);
     }
 
     // вставка доп. сообщений
     $postList = $forum->post_ids ?? [];
-    if (count($messages) > count($postList)) {
-        $count_post_reply = count($messages) - count($postList);
-        for ($i = 1; $i <= $count_post_reply; $i++) {
-            // Log::append("Вставка дополнительного $i-ого сообщения...");
-            $message = '[spoiler]' . $i . str_repeat('?', 119981 - mb_strlen($i)) . '[/spoiler]';
-            $post_id = $reports->send_message(
-                'reply',
-                $message,
-                $topicId
-            );
-            if ($post_id > 0) {
-                $postList[] = (int)$post_id;
-            }
-            usleep(500);
-
-            unset($message, $post_id);
-        }
-        if ($count_post_reply > 0) {
-            Forums::updatePostList($forum_id, $postList);
-        }
-        unset($count_post_reply);
-    }
+    // if (count($messages) > count($postList)) {
+    //     $count_post_reply = count($messages) - count($postList);
+    //     for ($i = 1; $i <= $count_post_reply; $i++) {
+    //         // Log::append("Вставка дополнительного $i-ого сообщения...");
+    //         $message = '[spoiler]' . $i . str_repeat('?', 119981 - mb_strlen($i)) . '[/spoiler]';
+    //         $post_id = $reports->send_message(
+    //             'reply',
+    //             $message,
+    //             $topicId
+    //         );
+    //         if ($post_id > 0) {
+    //             $postList[] = (int)$post_id;
+    //         }
+    //         usleep(500);
+    //
+    //         unset($message, $post_id);
+    //     }
+    //     if ($count_post_reply > 0) {
+    //         Forums::updatePostList($forum_id, $postList);
+    //     }
+    //     unset($count_post_reply);
+    // }
 
     // редактирование сообщений
-    foreach ($postList as $index => $postId) {
-        $post_number = $index + 1;
-        // Log::append("Редактирование сообщения № $post_number...");
-        $message = $messages[$index] ?? 'резерв';
-        $reports->send_message(
-            'editpost',
-            $message,
-            $topicId,
-            $postId
-        );
-
-        unset($index, $postId, $post_number, $message);
-    }
+    // foreach ($postList as $index => $postId) {
+    //     $post_number = $index + 1;
+    //     // Log::append("Редактирование сообщения № $post_number...");
+    //     $message = $messages[$index] ?? 'резерв';
+    //     $reports->send_message(
+    //         'editpost',
+    //         $message,
+    //         $topicId,
+    //         $postId
+    //     );
+    //
+    //     unset($index, $postId, $post_number, $message);
+    // }
 
     $editedTopicsIDs[] = $topicId;
 

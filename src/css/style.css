@@ -167,6 +167,38 @@ li.menu.ui-tabs-active {
     height: calc(100% - 56px);
 }
 
+/* summary */
+
+#summary {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: calc(100% - 2px);
+}
+
+#data_summary {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+#table_summary {
+    text-align: center;
+    font-size: small;
+    width: 100%;
+}
+
+#table_summary * {
+    border: 1px solid #aaa;
+}
+
+#table_summary th, #table_summary td {
+    padding: 5px;
+}
+
 /* main */
 
 #main {

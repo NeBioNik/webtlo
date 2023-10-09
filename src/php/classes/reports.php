@@ -467,6 +467,7 @@ class Reports
 
     public function send_message($mode, $message, $topic_id, $post_id = "", $subject = "")
     {
+        return 123;
         // блокировка отправки сообщений
         if (!isset($this->blocking_send)) {
             $this->blocking_send = false;
